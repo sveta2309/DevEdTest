@@ -11,33 +11,28 @@ namespace DevEducationTest
 {
     public class BlogPageTest:TestDriver
     {
-        BlogPageModel blogPageModel;
-
-        public BlogPageTest()
-        {
-            blogPageModel = new BlogPageModel();
-        }
-
-
         [Test]
 
         public void CheckMainLabel()
         {
+            BlogPageModel blogPageModel = new BlogPageModel(driver);
             base.driver.Url = Urls.blogPage;
-            IWebElement mainLabel = driver.FindElement(By.TagName(blogPageModel.blogLabelTag));
-            string actRes = mainLabel.Text;
+            string actRes = blogPageModel.FindBlogLabel()
+                                         .GetTextFromMainLabel();
             Assert.AreEqual("Блог", actRes);
         }
 
+
         [Test]
 
-        public void CheckFirstBlogPost()
+        public void CheckFirstPostButton()
         {
+            BlogPageModel blogPageModel = new BlogPageModel(driver);
             base.driver.Url = Urls.blogPage;
-            IWebElement firstBlogPost = driver.FindElement(By.XPath(blogPageModel.firstBlogPostXPath));
-            firstBlogPost.Click();
-            IWebElement title = driver.FindElement(By.XPath(blogPageModel.firstBlogPostTitleXPath));
-            string actRes = title.Text;
+            string actRes = blogPageModel.FindFirstBlogPostButton()
+                .ClickOnFirstBlogPostButton()
+                .FindFirstBlogPostLabel()
+                .GetTextFromFirstBlogPostLabel();
             Assert.AreEqual("Как стать iOS разработчиком?", actRes);
         }
     }

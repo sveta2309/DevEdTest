@@ -12,24 +12,15 @@ namespace DevEducationTest
     public class CoursesPageTest : TestDriver
 
     {
-        CoursesPageModel coursesPageModel;
-        KyivPageModel kyivPageModel;
-
-        public CoursesPageTest()
-        {
-            coursesPageModel = new CoursesPageModel();
-            kyivPageModel = new KyivPageModel();
-
-        }
-
 
         [Test]
 
         public void CheckMainLabel()
         {
+            CoursesPageModel coursesPageModel = new CoursesPageModel(driver);
             base.driver.Url = Urls.coursesPage;
-            IWebElement mainLabel = driver.FindElement(By.TagName(coursesPageModel.ourCoursesLabelTag));
-            string actRes = mainLabel.Text;
+            string actRes = coursesPageModel.FindCoursesLabel()
+                .GetTextFromMainLabel();
             Assert.AreEqual("Наши курсы", actRes);
         }
 
@@ -37,51 +28,48 @@ namespace DevEducationTest
 
         public void CheckKyivLabel()
         {
+            CoursesPageModel coursesPageModel = new CoursesPageModel(driver);
             base.driver.Url = Urls.coursesPage;
-            IWebElement cityKyivButton = driver.FindElement(By.XPath(coursesPageModel.cityKiyvXPath));
-            cityKyivButton.Click();
-            IWebElement locationLabel = driver.FindElement(By.XPath(kyivPageModel.ourCoursesLocationXPath));
-            string actRes = locationLabel.Text;
+            string actRes = coursesPageModel.FindKyivCityButton()
+                .ClickOnKyivCityButton()
+                .FindLocalisation()
+                .GetTextFromLocalisationLabel();
             Assert.AreEqual("Киев", actRes);
         }
 
         [Test]
         public void CheckBookkeepingKyivLabel()
         {
+            CoursesPageModel coursesPageModel = new CoursesPageModel(driver);
             base.driver.Url = Urls.coursesPage;
-            IWebElement bookkeepingKyivButton = driver.FindElement(By.XPath(coursesPageModel.bookkeepingKiyvXPath));
-            bookkeepingKyivButton.Click();
-            IWebElement bookkeepingCourseKyiv = driver.FindElement(By.XPath(kyivPageModel.courseNameBookkeepingXPath));
-            string actRes = bookkeepingCourseKyiv.Text;
+            string actRes = coursesPageModel.FindKyivBookkeepingButton()
+                .ClickOnKyivBookkeepingButton()
+                .FindCoursesLabel()
+                .GetTextFromMainLabel();
             Assert.AreEqual("Bookkeeping", actRes);
         }
 
+        [Test]
 
-
-
-
-        //[Test]
-        //Тест падает, не могу понять в чем причина. Пишет что с полем имейла нельзя взаимодействовать, и не может записать в него строку.
-
-        //public void CheckContactUsOption()
-        //{
-        //    base.driver.Url = Urls.coursesPage;
-        //    IWebElement contactUsButton = driver.FindElement(By.XPath(coursesPageModel.contactUsXPath));
-        //    contactUsButton.Click();
-        //    IWebElement nameField = driver.FindElement(By.Name(coursesPageModel.contactUsInputName));
-        //    nameField.SendKeys("test");
-        //    IWebElement emailField = driver.FindElement(By.Name(coursesPageModel.contactUsInputEMailName));
-        //    //emailField.SendKeys("test@i.ua");
-        //    IWebElement messageField = driver.FindElement(By.Name(coursesPageModel.contactUsInputMessageName));
-        //    messageField.SendKeys("test");
-        //    IWebElement sendButton = driver.FindElement(By.XPath(coursesPageModel.contactUsSendButtonClassName));
-        //    sendButton.Click();
-        //    IWebElement massegeSendWindow = driver.FindElement(By.XPath(coursesPageModel.contactUsMessageSendXPath));
-        //    string actRes = massegeSendWindow.Text;
-        //    Assert.AreEqual("Сообщение отправлено", actRes);
-
-        //}
-
-
+        public void CheckContactUsOption()
+        {
+            CoursesPageModel coursesPageModel = new CoursesPageModel(driver);
+            base.driver.Url = Urls.coursesPage;
+            IWebElement actRes = coursesPageModel.FindContactUsButton()
+                .ClickOnContactUsButton()
+                .FindNameField()
+                .SendName()
+                .FindEmailField()
+                .SendEMail()
+                .FindMessageField()
+                .SendMessage()
+                .FindSendButton()
+                .ClickOnSendButton()
+                .FindPopUpMessage();
+            if (actRes != null)
+            {
+                Assert.Pass();
+            }
+        }
     }
 }

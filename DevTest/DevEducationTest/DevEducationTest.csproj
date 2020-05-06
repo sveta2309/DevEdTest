@@ -64,9 +64,12 @@
     <Compile Include="POM\ContactsPageModel.cs" />
     <Compile Include="POM\CoursesPageModel.cs" />
     <Compile Include="POM\GraduatesPageModel.cs" />
+    <Compile Include="POM\KyivBookkeepingPageModel.cs" />
     <Compile Include="POM\KyivPageModel.cs" />
     <Compile Include="POM\MainPageModel.cs" />
+    <Compile Include="POM\MoreDetailsAboutUsPageModel.cs" />
     <Compile Include="POM\NewsPageModel.cs" />
+    <Compile Include="POM\PrivatePolicyPageModel.cs" />
     <Compile Include="TestDriver.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Urls.cs" />

@@ -17,7 +17,7 @@ namespace DevEducationTest
 
         public void StartBrowser()
         {
-            driver = new ChromeDriver("C:\\Users\\Lenovo\\Desktop");
+            driver = new ChromeDriver("C:\\Users\\Lenovo\\Desktop\\Ковалёва Света");
             driver.Manage().Window.Maximize();
         }
 

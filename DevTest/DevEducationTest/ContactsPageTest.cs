@@ -11,77 +11,81 @@ namespace DevEducationTest
 {
     public class ContactsPageTest:TestDriver
     {
-        ContactsPageModel contactsPageModel;
-
-        public ContactsPageTest()
-        {
-            contactsPageModel = new ContactsPageModel();
-        }
-
         [Test]
 
         public void CheckMainLabel()
         {
+            ContactsPageModel contactsPageModel = new ContactsPageModel(driver);
             base.driver.Url = Urls.contactsPage;
-            IWebElement mainLabel = driver.FindElement(By.TagName(contactsPageModel.contactsLabelTag));
-            string actRes = mainLabel.Text;
+            
+            string actRes = contactsPageModel.FindContactsLabel()
+                                         .GetTextFromMainLabel();
             Assert.AreEqual("Наши контакты", actRes);
         }
 
         [Test]
         public void CheckDneprLabel()
         {
-
+            ContactsPageModel contactsPageModel = new ContactsPageModel(driver);
             base.driver.Url = Urls.contactsPage;
             driver.Manage().Window.Minimize();
-            IWebElement dneprButton = driver.FindElement(By.XPath(contactsPageModel.dneprContactsButtonXPath));
-            dneprButton.Click();
-            IWebElement adressDnepr = driver.FindElement(By.XPath(contactsPageModel.dneprContactsAdressXPath));
-            string actRes = adressDnepr.Text;
+
+            string actRes = contactsPageModel.FindDneprContactsButton()
+                .ClickOnDneprContactsButton()
+                .FindDneprContactsAdress()
+                .GetTextFromDneprContactsAdress();
             Assert.AreEqual("ул.Симферопольская, 17", actRes);
         }
         [Test]
         public void CheckKyivLabel()
         {
+            ContactsPageModel contactsPageModel = new ContactsPageModel(driver);
             base.driver.Url = Urls.contactsPage;
             driver.Manage().Window.Minimize();
-            IWebElement kyivButton = driver.FindElement(By.XPath(contactsPageModel.kyivContactsButtonXPath));
-            kyivButton.Click();
-            IWebElement adressKyiv = driver.FindElement(By.XPath(contactsPageModel.kyivContactsAdressXPath));
-            string actRes = adressKyiv.Text;
+
+            string actRes = contactsPageModel.FindKyivContactsButton()
+                .ClickOnKyivContactsButton()
+                .FindkyivContactsAdress()
+                .GetTextFromKyivContactsAdress();
             Assert.AreEqual("ст. метро Васильковская, ул. Сумская,1", actRes);
         }
         [Test]
         public void CheckBakuLabel()
         {
+            ContactsPageModel contactsPageModel = new ContactsPageModel(driver);
             base.driver.Url = Urls.contactsPage;
             driver.Manage().Window.Minimize();
-            IWebElement bakuButton = driver.FindElement(By.XPath(contactsPageModel.bakuContactsButtonXPath));
-            bakuButton.Click();
-            IWebElement adressbaku = driver.FindElement(By.XPath(contactsPageModel.bakuContactsAdressXPath));
-            string actRes = adressbaku.Text;
+
+            string actRes = contactsPageModel.FindBakuContactsButton()
+                .ClickOnBakuContactsButton()
+                .FindBakuContactsAdress()
+                .GetTextFromBakuContactsAdress();
             Assert.AreEqual("проспект Бабека 10E, Rusel Plaza, 7 этаж", actRes);
         }
         [Test]
         public void CheckPetersburgLabel()
         {
+            ContactsPageModel contactsPageModel = new ContactsPageModel(driver);
             base.driver.Url = Urls.contactsPage;
             driver.Manage().Window.Minimize();
-            IWebElement petersburgButton = driver.FindElement(By.XPath(contactsPageModel.petersburgContactsButtonXPath));
-            petersburgButton.Click();
-            IWebElement adressPetersburg = driver.FindElement(By.XPath(contactsPageModel.petersburgContactsAdressXPath));
-            string actRes = adressPetersburg.Text;
+
+            string actRes = contactsPageModel.FindPetersburgContactsButton()
+                .ClickOnPetersburgContactsButton()
+                .FindPetersburgContactsAdress()
+                .GetTextFromPetersburgContactsAdress();
             Assert.AreEqual("площадь Карла Фаберже, 8Б, офис 440\r\nБЦ Золотая Долина", actRes);
         }
         [Test]
         public void CheckKharkovLabel()
         {
+            ContactsPageModel contactsPageModel = new ContactsPageModel(driver);
             base.driver.Url = Urls.contactsPage;
             driver.Manage().Window.Minimize();
-            IWebElement kharkovButton = driver.FindElement(By.XPath(contactsPageModel.kharkovContactsButtonXPath));
-            kharkovButton.Click();
-            IWebElement adressKharkov = driver.FindElement(By.XPath(contactsPageModel.kharkovContactsAdressXPath));
-            string actRes = adressKharkov.Text;
+
+            string actRes = contactsPageModel.FindKharkovContactsButton()
+                .ClickOnKharkovContactsButton()
+                .FindKharkovContactsAdress()
+                .GetTextFromKharkovContactsAdress();
             Assert.AreEqual("ул. Донец Захаржевского, 2,\r\nздание Сбербанка, этаж 5", actRes);
         }
     }

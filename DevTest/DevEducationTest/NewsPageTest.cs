@@ -11,33 +11,26 @@ namespace DevEducationTest
 {
     public class NewsPageTest : TestDriver
     {
-        
-       
-        NewsPageModel newsPageModel;
-        public NewsPageTest()
-        {
-            newsPageModel = new NewsPageModel();
-        }
-        [Test]
+       [Test]
 
         public void CheckMainLabel()
         {
+            NewsPageModel newsPageModel = new NewsPageModel(driver);
             base.driver.Url = Urls.newsPage;
-            IWebElement mainLabel = driver.FindElement(By.TagName(newsPageModel.newsLabelTag));
-            string actRes = mainLabel.Text;
+            string actRes = newsPageModel.FindNewsLabel()
+                                         .GetTextFromMainLabel();
             Assert.AreEqual("Новости", actRes);
         }
-
-
         [Test]
 
-        public void CheckFirstNews()
+        public void CheckFirstPostButton()
         {
+            NewsPageModel newsPageModel = new NewsPageModel(driver);
             base.driver.Url = Urls.newsPage;
-            IWebElement firstNews = driver.FindElement(By.XPath(newsPageModel.firstNewsXPath));
-            firstNews.Click();
-            IWebElement title = driver.FindElement(By.XPath(newsPageModel.firstNewsTitleXPath));
-            string actRes = title.Text;
+            string actRes = newsPageModel.FindFirstNewsPostButton()
+                .ClickOnFirstArticleButton()
+                .FindFirstNewsLabel()
+                .GetTextFromFirstNewsBlogPostLabel();
             Assert.AreEqual("В Баку выпускников пригласили в крупные IT-компании", actRes);
         }
     }

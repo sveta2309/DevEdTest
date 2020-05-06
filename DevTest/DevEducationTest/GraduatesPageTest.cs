@@ -11,21 +11,14 @@ namespace DevEducationTest
 {
     public class GraduatesPageTest : TestDriver
     {
-        GraduatesPageModel graduatesPageModel;
-
-        public GraduatesPageTest()
-        {
-            graduatesPageModel = new GraduatesPageModel();
-        }
-
-
         [Test]
 
         public void CheckMainLabel()
         {
+            GraduatesPageModel graduatesPageModel = new GraduatesPageModel(driver);
             base.driver.Url = Urls.graduatesPage;
-            IWebElement mainLabel = driver.FindElement(By.XPath(graduatesPageModel.ourGraduatesLabelXPath));
-            string actRes = mainLabel.Text;
+            string actRes = graduatesPageModel.FindGraduatesLabel()
+                                         .GetTextFromMainLabel();
             Assert.AreEqual("Наши выпускники", actRes);
         }
     }

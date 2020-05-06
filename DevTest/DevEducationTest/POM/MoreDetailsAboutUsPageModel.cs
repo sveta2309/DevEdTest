@@ -7,29 +7,28 @@ using System.Threading.Tasks;
 
 namespace DevEducationTest.POM
 {
-    public class GraduatesPageModel
+    public class MoreDetailsAboutUsPageModel
     {
         private IWebDriver _driver;
 
-        public GraduatesPageModel(IWebDriver driver)
+        public MoreDetailsAboutUsPageModel(IWebDriver driver)
         {
             this._driver = driver;
         }
-        public By ourGraduatesLabelXPath = By.XPath("/html/body/div[1]/main/section[1]/div/div/h1");
+        public By mainLabelTagName = By.TagName("h1");
+
+        IWebElement mainLabel;
 
 
 
-        IWebElement graduatesLabel;
-
-        public GraduatesPageModel FindGraduatesLabel()
+        public MoreDetailsAboutUsPageModel FindMainLabel()
         {
-            graduatesLabel = _driver.FindElement(ourGraduatesLabelXPath);
+            mainLabel = _driver.FindElement(mainLabelTagName);
             return this;
         }
         public string GetTextFromMainLabel()
         {
-            return graduatesLabel.Text;
+            return mainLabel.Text;
         }
-
     }
 }

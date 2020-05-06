@@ -11,18 +11,16 @@ namespace DevEducationTest
 {
     public class AboutUsPageTest:TestDriver
     {
-        AboutUsPageModel aboutUsPageModel;
-        public AboutUsPageTest()
-        {
-            aboutUsPageModel = new AboutUsPageModel();
-        }
+       
+       
         [Test]
 
         public void CheckMainLabel()
         {
+            AboutUsPageModel aboutUsPageModel = new AboutUsPageModel(driver);
             base.driver.Url = Urls.aboutUsPage;
-            IWebElement mainLabel = driver.FindElement(By.ClassName(aboutUsPageModel.aboutUsClassName));
-            string actRes = mainLabel.Text;
+            string actRes = aboutUsPageModel.FindAboutUsLabel()
+                                         .GetTextFromMainLabel();
             Assert.AreEqual("О нас", actRes);
         }
 
@@ -31,11 +29,12 @@ namespace DevEducationTest
 
         public void CheckMoreDetailsButton()
         {
+            AboutUsPageModel aboutUsPageModel = new AboutUsPageModel(driver);
             base.driver.Url = Urls.aboutUsPage;
-            IWebElement moreDetailsButton = driver.FindElement(By.XPath(aboutUsPageModel.moreDetailsButtonXPath));
-            moreDetailsButton.Click();
-            IWebElement title = driver.FindElement(By.TagName("h1"));
-            string actRes = title.Text;
+            string actRes = aboutUsPageModel.FindMoreDetailsAboutUsMenuButton()
+                .ClickOnMoreDetailsButton()
+                .FindMainLabel()
+                .GetTextFromMainLabel();
             Assert.AreEqual("Вдохновитель", actRes);
         }
 
